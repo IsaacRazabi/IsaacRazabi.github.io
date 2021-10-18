@@ -30,7 +30,8 @@ export class ItemService {
   }
   realQuery(): Observable<Item[]> {
     let realItem = this.https.get(
-      '//.www.filltext.com/?rows=10&id={index}&name={username}&pretty=true'
+      // 'https://www.filltext.com/?rows=10&id={index}&name={username}&pretty=true'
+      'https://retoolapi.dev/hJJ4Ve/name=true'
     );
     realItem.subscribe(res=>{
       if(res===undefined) localStorage.setItem('item','')
