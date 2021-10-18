@@ -13,7 +13,7 @@ const ENTITY = 'item';
   providedIn: 'root',
 })
 export class ItemService {
-  constructor(private store: Store<ItemState>, private http: HttpClient) {
+  constructor(private store: Store<ItemState>, private https: HttpClient) {
     // If empty - load test data to storage
     const items = JSON.parse(localStorage.getItem(ENTITY) || 'null');
     if (!items || items.length === 0) {
@@ -29,7 +29,7 @@ export class ItemService {
     return from(storageService.query(ENTITY) as Promise<Item[]>);
   }
   realQuery(): Observable<Item[]> {
-    let realItem = this.http.get(
+    let realItem = this.https.get(
       'https://www.filltext.com/?rows=10&id={index}&name={username}&pretty=true'
     );
     realItem.subscribe(res=>{
