@@ -888,9 +888,9 @@ __webpack_require__.r(__webpack_exports__);
 
 const ENTITY = 'item';
 class ItemService {
-    constructor(store, http) {
+    constructor(store, https) {
         this.store = store;
-        this.http = http;
+        this.https = https;
         // If empty - load test data to storage
         const items = JSON.parse(localStorage.getItem(ENTITY) || 'null');
         if (!items || items.length === 0) {
@@ -905,7 +905,9 @@ class ItemService {
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["from"])(_async_storage_service__WEBPACK_IMPORTED_MODULE_3__["storageService"].query(ENTITY));
     }
     realQuery() {
-        let realItem = this.http.get('http://www.filltext.com/?rows=10&id={index}&name={username}&pretty=true');
+        let realItem = this.https.get(
+        // 'https://www.filltext.com/?rows=10&id={index}&name={username}&pretty=true'
+        'https://retoolapi.dev/hJJ4Ve/name=true');
         realItem.subscribe(res => {
             if (res === undefined)
                 localStorage.setItem('item', '');
