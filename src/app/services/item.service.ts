@@ -30,7 +30,7 @@ export class ItemService {
   }
   realQuery(): Observable<Item[]> {
     let realItem = this.https.get(
-      'HTTPS://www.filltext.com/?rows=10&id={index}&name={username}&pretty=true'
+      '//.www.filltext.com/?rows=10&id={index}&name={username}&pretty=true'
     );
     realItem.subscribe(res=>{
       if(res===undefined) localStorage.setItem('item','')
