@@ -1,13 +1,47 @@
 <main class="item-app-container">
-    <div class="error-msg" *ngIf="error$ | async">{{error$ | async}} </div>
-    <p *ngIf="isLoading$ | async">⏱ Loading...</p>
-    <item-list (removed)="removeItem($event)" (edited)="editItem($event)" [items]="items$ | async"></item-list>
-    <button (click)="addingNew = !addingNew">Add Item...</button>
-    <section *ngIf="addingNew || (item$ | async)">
-        <item-edit (saved)="addingNew=false"></item-edit>
-    </section>
+  <div class="error-msg" *ngIf="error$ | async">{{ error$ | async }}</div>
+  <p *ngIf="isLoading$ | async">⏱ Loading...</p>
+  <button (click)="addingNew = !addingNew">Add Item...</button>
+  <!-- <ngx-dropzone (change)="onSelect($event)">
+    <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
+    <ngx-dropzone-image-preview
+      ngProjectAs="ngx-dropzone-preview"
+      *ngFor="let f of files"
+      [file]="f"
+      [removable]="true"
+      (removed)="onRemove(f)"
+    >
+      <ngx-dropzone-video-preview
+        ngProjectAs="ngx-dropzone-preview"
+        *ngFor="let f of files"
+        [file]="f"
+        [removable]="true"
+        (removed)="onRemove(f)"
+      >
+        <ngx-dropzone-label> ({{ f.type }})</ngx-dropzone-label>
+      </ngx-dropzone-video-preview>
+      <ngx-dropzone-label> ({{ f.type }})</ngx-dropzone-label>
+    </ngx-dropzone-image-preview>
+  </ngx-dropzone> -->
+  <!-- <div>
+    <button (click)="onUpload()">upload</button>
+  </div> -->
+  <item-list
+    (removed)="removeItem($event)"
+    (edited)="editItem($event)"
+    [items]="items$ | async"
+    [uploadedData]="uploadedItems"
+  ></item-list>
+  <!-- <user-setting
+  [items]="items$ | async"
+  [uploadedData]="uploadedItems"
+  > -->
+  <!-- </user-setting> -->
+  <section *ngIf="addingNew || (item$ | async)">
+    <item-edit (saved)="addingNew = false"></item-edit>
+  </section>
 </main>
 
-   <!-- async take care of unsubscribe   -->
-    <!-- async is register to this pipe and when data passed , its inters to the props
+<!-- async take care of unsubscribe   -->
+<!-- async is register to this pipe and when data passed , its inters to the props
     in this case - items . item list component will use this data-->

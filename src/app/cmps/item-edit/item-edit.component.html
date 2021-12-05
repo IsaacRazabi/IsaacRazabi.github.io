@@ -1,9 +1,49 @@
-<section class="item-edit">
-    <h2>Item {{itemEditState}}</h2>
-    <form (submit)="$event.preventDefault();saveItem()">
-        <input type="text" name="name" [(ngModel)]="item.name" placeholder="Item name" />
-        <button>{{itemEditState}}</button>
+<section *ngIf="(loggedUser$|async)" [hidden]="!modalOpen" class="item-edit modalWrapper">
+  
+  <main   class="main-display" >
+    <button class="close-modal-btn" (click)="closeModal()">❌</button>
+      <h2 class="centered-text">{{itemEditState}} your post </h2>
+    <form class="form-container" (submit)="$event.preventDefault()">
+     
+        <!-- <input type="text" name="name" [(ngModel)]="item.name" placeholder="Item name" /> -->
+        <input class="form-text" type="text" name="name" [(ngModel)]="item.text" placeholder="What's on your mind" />
+        <!-- <button>{{itemEditState}}</button> -->
     </form>
-    <hr/>
-    <pre>{{item | json}}</pre>
+    <ngx-dropzone class="upload-container" (change)="onSelect($event)">
+        <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
+        <ngx-dropzone-image-preview
+          ngProjectAs="ngx-dropzone-preview"
+          *ngFor="let f of files"
+          [file]="f"
+          [removable]="true"
+          (removed)="onRemove(f)"
+        >
+          <ngx-dropzone-video-preview
+            ngProjectAs="ngx-dropzone-preview"
+            *ngFor="let f of files"
+            [file]="f"
+            [removable]="true"
+            (removed)="onRemove(f)"
+          >
+            <ngx-dropzone-label> ({{ f.type }})</ngx-dropzone-label>
+          </ngx-dropzone-video-preview>
+          <ngx-dropzone-label> ({{ f.type }})</ngx-dropzone-label>
+        </ngx-dropzone-image-preview>
+      </ngx-dropzone>
+      <!-- <pre>{{item | json}}</pre> -->
+      <button class="upload-btn" (click)="onUpload()">Add post</button>
+    </main>
+</section>
+<section *ngIf="!(loggedUser$|async)">
+  <div class="modalWrapper">
+    <main class="main-display" >
+      <button class="close-modal-btn" (click)="closeModal()">❌</button>
+      <p>Sorry! you have to sign-up to add posts</p>
+      <p>you can sign-up easily  <a routerLink="/login"
+        routerLinkActive="active-nav"
+        [routerLinkActiveOptions]="{ exact: true }"
+        > here</a></p>
+    
+</main>
+  </div>
 </section>

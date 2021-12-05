@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-
+import { NgxDropzoneModule } from 'ngx-dropzone';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -21,6 +21,9 @@ import { AppHeaderComponent } from './cmps/app-header/app-header.component';
 import { ItemListComponent } from './cmps/item-list/item-list.component';
 import { ItemPreviewComponent } from './cmps/item-preview/item-preview.component';
 import { ItemEditComponent } from './cmps/item-edit/item-edit.component';
+import { LoginComponent } from './cmps/login/login.component';
+import { UserSettingComponent } from './cmps/user-setting/user-setting.component';
+
 
 @NgModule({
   declarations: [
@@ -31,9 +34,13 @@ import { ItemEditComponent } from './cmps/item-edit/item-edit.component';
     ItemEditComponent,
     ItemListComponent,
     ItemPreviewComponent,
+    LoginComponent,
+    UserSettingComponent,
+
   ],
   imports: [
     BrowserModule,
+    NgxDropzoneModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,

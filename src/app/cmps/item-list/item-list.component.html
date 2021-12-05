@@ -1,8 +1,18 @@
-<section class="card-grid">
-    <item-preview *ngFor="let item of items" [item]="item">
-        <section>
-            <button (click)="removeItem(item.id!)">x</button>
-            <button (click)="editItem(item.id!)">Edit</button>
-        </section>
-    </item-preview>
+<section class="card-grid main-layout">
+  <item-preview *ngFor="let item of items" [item]="item">
+    <section>
+      {{ uploadedData }}
+      <!-- *ngIf ="loggedUser.fullname===item?.by?.fullname"   -->
+      <!-- <p>{{(loggedUser$ |async)!.fullname}}</p> -->
+      <div *ngIf="loggedUser$ | async">
+        <button  *ngIf ="loggedUser.fullname===item?.by?.fullname" (click)="removeItem(item.id!)">x</button>
+        <button *ngIf ="loggedUser.fullname===item?.by?.fullname" (click)="editItem(item.id!)">Edit</button>
+      </div>
+    </section>
+  </item-preview>
+  <!-- <user-setting *ngFor="let item of items" [item]="item">
+    <section>
+      {{ uploadedData }}
+    </section>
+  </user-setting> -->
 </section>

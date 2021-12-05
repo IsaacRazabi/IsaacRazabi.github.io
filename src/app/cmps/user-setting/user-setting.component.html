@@ -1,0 +1,22 @@
+<p>setting</p>
+
+<!-- <ul *ngFor="let item of items">
+  <li>{{item?.by?.fullname}}</li>
+</ul> -->
+
+<main *ngFor="let item of items" >
+  <section  *ngIf="loggedUser$ | async" >
+<section *ngIf="loggedUser.fullname===item?.by?.fullname"  class="item-preview">
+  <p>Added by : {{item?.by?.fullname}}</p>
+  <p>{{item?.by?.date | date: 'hh:mm:ss a'}}</p>
+  <h2>{{item?.name}}</h2>
+    <p class="text">
+     {{item?.text}}
+    </p>
+    <!-- <p>Id: {{item?.id}}</p> -->
+    <hr />
+    <img [src]="img">
+    <img [src]=item?.img>
+    </section>
+  </section>
+  </main>

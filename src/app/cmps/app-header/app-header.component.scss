@@ -29,3 +29,70 @@
     cursor: pointer;
   }
 }
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri&family=Lato&family=Mukta&family=Nunito+Sans:wght@200&family=Poppins:wght@200;400&display=swap');
+
+.logIn-dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 10px 5px 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 3px solid black;
+}
+
+
+.dropdown div{
+  margin-top:55px;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+  width: 85px;
+  height: 42px;
+  border: 1px solid #ddd;
+  border-radius: 50px;
+  justify-items: center;
+  
+}
+.show{
+   display: none;
+}
+
+.dropdownContent {
+ 
+  position: absolute;
+  background-color:white;
+  min-width: 65px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.hello-user{
+  font-weight: 600;
+  // font-size: 14px;
+  background-color: rgb(212, 205, 205);
+  color: gray;
+}
+.dropdownContent a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  width: 120px;
+}
+
+.dropdownContent a:hover {
+  background-color: #ddd;
+}
+.user{
+  cursor: pointer;
+  /* border: 1px solid #dadada;
+    border-radius: 40px; */
+}
+.dropdown p{
+  margin-top:7px;
+}

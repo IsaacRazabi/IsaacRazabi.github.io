@@ -1,17 +1,142 @@
 <nav class="nav-container flex space-between align-center">
-    <div class="flex">
-        <a routerLinkActive="active-nav" routerLink="/home" [routerLinkActiveOptions]="{exact: true}">
-            <div class="flex align-center">
-                <span class="nav-txt">Home</span>
-            </div>
-        </a>
-        <a routerLinkActive="active-nav" routerLink="/item" [routerLinkActiveOptions]="{exact: true}">
-            <div class="flex align-center">
-                <span class="nav-txt">Items</span>
-            </div>
-        </a>
-    </div>
-    <a routerLink="/home">
-        <img src="./assets/img/logo.png" alt="app-logo" title="Go home" />
+  <div class="flex">
+    <a
+      routerLinkActive="active-nav"
+      routerLink="/home"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <div class="flex align-center">
+        <span class="nav-txt">Home</span>
+      </div>
     </a>
+    <!-- <a
+      routerLinkActive="active-nav"
+      routerLink="/item"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <div class="flex align-center">
+        <span class="nav-txt">Items</span>
+      </div>
+    </a> -->
+    <!-- <a
+      routerLinkActive="active-nav"
+      routerLink="/login"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <div class="flex align-center">
+        <span class="nav-txt">login</span>
+      </div>
+    </a> -->
+  </div>
+  <!-- <a routerLink="/home">
+    <img src="./assets/img/logo.png" alt="app-logo" title="Go home" />
+  </a> -->
+  <!-- <a routerLink="/login"
+  routerLinkActive="active-nav"
+  [routerLinkActiveOptions]="{ exact: true }"
+  > -->
+    
+  <!-- <span class="nav-txt">login</span>
+  </a>
+  <span class="hello-user" *ngIf="(loggedUser$ | async)"
+    ><a>Hello {{ (loggedUser$ | async).fullname }}</a>
+    <button (click)="findUser()">ppp</button>
+  </span> -->
+
+  <span *ngIf="!(loggedUser$ | async)">
+  <img  (click)="toggleShow()"  class="dropdown"  src="../../../assets/img/download.png" >
+  <div [class.show]="isShow">
+  <span   class=" user" >
+   <p> <a routerLink="/login"
+    routerLinkActive="active-nav"
+    [routerLinkActiveOptions]="{ exact: true }"
+    >login</a></p>
+  <!-- <p>setting</p> -->
+  </span>
+  </div>
+  </span>
+  <div  (click)="toggleShow()" class="dropdown"  *ngIf="(loggedUser$ | async)" > 
+    <p>Hello {{ (loggedUser$ |async)!.fullname }}</p>
+    <div [class.show]="isShow">
+  <p *ngIf="(loggedUser$ | async)">logout</p>
+  <p> <a routerLink="/user-setting"
+    routerLinkActive="active-nav"
+    [routerLinkActiveOptions]="{ exact: true }"
+    >Setting</a></p>
+    </div>
+
+      <!-- <div  *ngIf="(loggedUser$ | async)"  [class.show]="isShow" class="dropdownContent">
+      <div class="hello-user"><a>Hello {{ (loggedUser$ |async).fullname }}</a></div>
+       <hr  *ngIf="(loggedUser$ | async)">
+      <span  *ngIf="(loggedUser$ | async)" (click)="logout"><a>Log Out</a></span> -->
+
+      <!-- <router-link *ngIf="!(loggedUser$ | async)" to="/sign-up">Log In</router-link> -->
+      <!-- <router-link to="/sign-up">Sign Up</router-link> -->
+      <hr/>
+      </div>
+      <!-- </div> -->
+    <!-- </div> -->
+  
+
+
 </nav>
+<!-- 
+<template>
+    <main class="nav-bar-container">
+      <div class="nav-bar-main">
+        <section class="header-container">
+            <a routerLinkActive="active-nav" routerLink="/home" [routerLinkActiveOptions]="{exact: true}"></a>
+        <div class="logo-container">
+          <div class="logo-img-container">
+            <img class="logo-img" src="@/assets/imgs/app-logo/placetobnbred-logo.jpg">
+          </div>
+          <div class="logo-title">
+            placetobnb
+          </div>
+        </div>  
+       
+ 
+          <div class="side-header">
+    
+          <nav class="nav-menu">
+    
+            <a routerLinkActive="active-nav" routerLink="/home" [routerLinkActiveOptions]="{exact: true}"></a> 
+                <a routerLinkActive="active-nav" routerLink="/item" [routerLinkActiveOptions]="{exact: true}"></a>
+         
+
+          </nav>
+    
+           <div class="dropdown">
+            <span  class=" user" (click)="toogleShow()">
+              <img
+                class="header-img"
+                src="@/assets/imgs/user-login/download.png"
+              /><img *ngIf="loggedInUser"
+                class="header-img"
+                src="@/assets/imgs/user-login/userGuest.a58b1fc1 - red.jpg"
+              />
+              <img *ngIf="!loggedInUser"
+                class="header-img"
+                src="@/assets/imgs/user-login/userGuest.a58b1fc1 - dark.jpg"
+              />
+
+            </span>
+            <div  >
+              <div  class="dropdownContent">
+              <div class="hello-user" *ngIf="loggedInUser">
+                <!-- <a>Hello {{ loggedInUser.fullname }}</a> -->
+<!-- </div>
+               <hr *ngIf="loggedInUser"/>
+              <span *ngIf="loggedInUser" (click)="logout"><a>Log Out</a></span>
+              
+              <a routerLinkActive="active-nav" routerLink="/home" [routerLinkActiveOptions]="{exact: true}"></a> 
+              <a routerLinkActive="active-nav" routerLink="/item" [routerLinkActiveOptions]="{exact: true}"></a>
+              </div>
+              </div>
+            </div>
+            </div>
+        </section>
+          
+    </div>
+    </main>
+    </template>  -->

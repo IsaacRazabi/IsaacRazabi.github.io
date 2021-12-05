@@ -1,9 +1,44 @@
-<section class="item-preview">
-    <h2>{{item?.name}}</h2>
-    <p>Id: {{item?.id}}</p>
+<section  class="item-preview">
+  <p>Added by : {{item?.by?.fullname}}</p>
+  <p>{{item?.by?.date | date: 'hh:mm:ss a'}}</p>
+  <h2>{{item?.name}}</h2>
+    <p class="text">
+     {{item?.text}}
+    </p>
+    <!-- <p>Id: {{item?.id}}</p> -->
     <hr />
     <img [src]="img">
+    <img [src]=item?.img>
+    <!-- <img src='{{item.img}}' -->
     <div class="text-center">
         <ng-content></ng-content>
     </div>
+ 
 </section>
+<!-- 
+<section>
+    <div class="column">
+        <div class="header-d">`${newItem.itemType}`</div>
+        <div class="card-container">
+          <ng-container class="clean-li card" *ngFor="let item of items">
+            <p class="card-text" *ngIf="item.itemType === ${newItem.itemType}">
+              <span data-id="${this._getColumnNumber()}" (click)="transferCard($event, -1, item.name)"
+                ><</span
+              >
+              {{ item.name} }}
+              <span class="addCardBtn" (click)="update(item)"  
+              >update card </span>
+              <span class="addCardBtn" (click)="remove(item)"  
+              >remove </span>
+            </p>
+            <form class="edit-form" *ngIf="showEditForm && item.active && item.itemType ===  ${
+              newItem.itemType
+            }" >
+              <input itemType="text" [(ngModel)]="item.name" name="name" />
+              <button (click)="updateItem(item)">update</button>
+            </form>
+          </ng-container>
+        </div>
+        <span class="addCardBtn" (click)="addCard('others')">+Add a card</span>
+      </div>`
+</section> -->

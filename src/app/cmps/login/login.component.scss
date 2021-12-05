@@ -1,0 +1,76 @@
+.signup-container{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.signup-input{
+  min-width: 250px;
+    width: 28%;
+    max-width: 400px;
+    outline: none!important;
+    margin-bottom: 7px;
+    border-radius: 8px;
+    height: 2.6rem;
+    border-width: 1px;
+}
+.signup-wraaper{
+      display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.signup-wraaper label{
+  font-size: 2rem ;
+}
+// .signup-wraaper button{
+//       min-width: 250px;
+//     width: 28%;
+//     max-width: 400px;
+//     color: hotpink;
+//     font-size: 1rem;
+// }
+
+
+.modalWrapper {
+  position: fixed; /* Stay in place */
+  z-index: 2; /* Sit on top */
+  padding-top: 12px; /* Location of the box */
+  bottom: 50px;
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  /* overflow: auto; */
+   /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+   
+}
+
+.main-display {
+  gap: 15px;
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 10px;
+  border: 1px solid #888;
+  width: 80%;
+  // height: 50%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+  border-radius:1%;
+  display: flex;
+  flex-direction: column;
+  /* text-align: center; */
+  /* grid-auto-columns: 1fr,1fr,1fr; */
+}
+.close-modal-btn{
+  width: 5%;
+  max-width: 400px;
+  color: hotpink;
+  font-size: 1rem;
+  background-color: transparent;
+}

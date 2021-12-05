@@ -1,6 +1,32 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit ,
+  EventEmitter,
+  Output,
+  ContentChild,
+  Pipe,
+  PipeTransform,
+  SecurityContext,
+  AfterViewInit,
+  ViewChild,
+  ElementRef,
+  Directive,
+  Optional,} from '@angular/core';
 import { Item } from 'src/app/models/item';
 import { ItemListComponent } from '../item-list/item-list.component';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Store } from '@ngrx/store';
+import { State } from '../../store/store';
+import { User } from 'src/app/models/item';
+import { pluck } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+
+@Pipe({ name: 'keepHtml', pure: false })
+export class EscapeHtmlPipe implements PipeTransform {
+  constructor(private sanitizer: DomSanitizer) {}
+
+  transform(content: any) {
+    return this.sanitizer.sanitize(SecurityContext.HTML, content);
+  }
+}
 
 @Component({
   selector: 'item-preview',
@@ -9,10 +35,16 @@ import { ItemListComponent } from '../item-list/item-list.component';
 })
 export class ItemPreviewComponent implements OnInit {
   @Input() item: Item | null = null; //gets from father component : item-list
-  img = "https://random.imagecdn.app/500/150"
-  constructor(private itemList: ItemListComponent) {
+  loggedUser$: Observable<User | null>;
+
+  // img = this.item!.img ;
+  img ='https://random.imagecdn.app/500/150 ';
+  strHtml: string = '';
+  constructor(private itemList: ItemListComponent,private store: Store<State>) { 
+    this.loggedUser$ = this.store.select('userState').pipe(pluck('user'))!;
+  }
+  ngOnInit(){
+    
     
   }
-
-  ngOnInit(): void {}
 }

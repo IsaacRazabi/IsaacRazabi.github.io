@@ -1,0 +1,52 @@
+
+    <section [hidden]="!modalOpen" class="signup-container modalWrapper">
+      <main class="main-display">
+        <button class="close-modal-btn" (click)="closeModal()">❌</button>
+        <form class="signup-wraaper" (submit)="$event.preventDefault();login()">
+          <label for="">login</label>
+          <input
+            type="text"
+            placeholder="username"
+            [(ngModel)]="credentials.username"
+            [ngModelOptions]="{standalone: true}"
+            class="signup-input"
+          />
+          <input
+            type="password"
+            placeholder="password"
+            [(ngModel)]="credentials.password"
+            [ngModelOptions]="{standalone: true}"
+            class="signup-input"
+          />
+          <button class="signup-input">login</button>
+        </form>
+        
+        <div class="sign-up"  *ngIf="!loggedInUser">
+          <form class="signup-wraaper" (submit)="$event.preventDefault();signup()">
+            <label for="">sign up</label>
+            <input
+              type="text"
+              placeholder="username"
+              [(ngModel)]="signUpCredentials.username"
+              [ngModelOptions]="{standalone: true}"
+              class="signup-input"
+            />
+            <input
+              type="text"
+              placeholder="Your full name"
+              [(ngModel)]="signUpCredentials.fullname"
+              [ngModelOptions]="{standalone: true}"
+              class="signup-input"
+            />
+            <input
+              type="password"
+              placeholder="password"
+              [(ngModel)]="signUpCredentials.password"
+              [ngModelOptions]="{standalone: true}"
+              class="signup-input"
+            />
+            <button class="signup-input">Signup</button>
+          </form>
+        </div>
+      </main>
+      </section>

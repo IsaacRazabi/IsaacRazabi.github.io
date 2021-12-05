@@ -23,7 +23,7 @@ interface Entity {
   isAdmin?: boolean,
   id?:any
 }
-
+const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 async function query(entityType: string, delay = 1000): Promise<Entity[]> {
     var entities = JSON.parse(localStorage.getItem(entityType) || 'null') || []
     if (delay) {
@@ -45,6 +45,7 @@ async function post(entityType: string, newEntity: Entity): Promise<Entity> {
     const entities = await query(entityType)
     entities.push(newEntity)
     _save(entityType, entities)
+    _saveLocalUser(newEntity)
     return newEntity
 }
 
@@ -69,6 +70,16 @@ async function remove(entityType: string, entityId: string) : Promise<boolean> {
 function _save(entityType: string, entities : Entity[]) {
     localStorage.setItem(entityType, JSON.stringify(entities))
 }
+
+function _saveLocalUser(user:any) {
+    sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
+    return user
+}
+
+function getLoggedinUser() {
+    return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER) || 'null')
+}
+
 
 function makeId(length = 5) {
     var txt = ''
