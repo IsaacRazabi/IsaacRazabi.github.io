@@ -20,7 +20,12 @@ import { pluck } from 'rxjs/operators';
 //   isAdmin:boolean,
 // }
 export class LoginComponent implements OnInit {
-  credentials = { username: "", password: "" };
+  credentials :any= {
+    username: "",
+    password: "",
+    fullname: "",
+    isAdmin: false,
+  };
   signUpCredentials:any= {
     username: "",
     password: "",
@@ -38,10 +43,12 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
   login(){
-    this.store.dispatch(new Login (this.signUpCredentials));
+    this.store.dispatch(new Login (this.credentials));
+    this.router.navigate(['home']);
   }
-  signup(){
-this.store.dispatch(new SaveUser (this.signUpCredentials));
+async  signup(){
+await this.store.dispatch(new SaveUser (this.signUpCredentials));
+await this.store.dispatch(new Login (this.signUpCredentials));
 this.router.navigate(['home']);
 }
 

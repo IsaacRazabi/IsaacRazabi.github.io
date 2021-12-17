@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
+import { from, of } from 'rxjs';
 import { map, catchError, switchMap, tap } from 'rxjs/operators';
 import { ItemService } from '../services/item.service';
 import { UserService } from '../services/user.service';
@@ -188,11 +188,11 @@ export class AppEffects {
       ofType(LOGIN),
       tap(() => console.log('Effects: load user ==> service')),
       switchMap((action) =>
-        of(this.userService.login(action)).pipe(
-          tap(() => console.log('Effects: Got login user from service ===> Reducer')),
+        from(this.userService.login(action)).pipe(
+          tap(() => console.log('Effects: Got login user from service ===> Reducer',action)),
           map((user) => ({
             type: LOADED_LOGGED_USER,
-            user,
+            user:action.user,   
           })),
           catchError((error) => {
             console.log('Effect: Caught error ===> Reducer', error);

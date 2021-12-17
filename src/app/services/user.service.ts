@@ -189,13 +189,18 @@ async  getById(userId:any) {
 }
 
  async login (userCred:any) {
-    let users = await storageService.query('user')
-    const user = users.find((user:any) => user.id === userCred.id)
+    let users = await storageService.query('user');
+    console.log(userCred)
+    let userCredId = users.find((user:any)=> 
+        user.user.password === userCred.user.password && user.user.fullname === userCred.user.fullname);  
+    const user = users.find((user:any) => user.id === userCredId!.id);
+    console.log(user);
+    
     // return _saveLocalUser(user)
 
     // const user = await httpService.post('auth/login', userCred)
     // socketService.emit('login', user._id);
-    if (user) return this._saveLocalUser(user)
+    if (user) return this._saveLocalUser(of(user))
     else { return console.log('no user')};    
 }
 // async login (userCred:any) {
@@ -221,7 +226,7 @@ async  getById(userId:any) {
     const user = from(storageService.post('user', userCred)); 
     // const user = await httpService.post('auth/signup', userCred)
     // socketService.emit('set-user-socket', user._id);
-
+    // this._saveLocalUser(user)
     return this._saveLocalUser(user)
 //    return user  
 }

@@ -104,9 +104,8 @@ export function reducer(state: UserState = initialState, action: any): UserState
       return { ...state, users, user, error: '' };
     }
     case LOADED_LOGGED_USER: {
-      console.log(action);
       const { user } = action; 
-      let loggedUser=user.user
+     let loggedUser=user.user
       console.log('Reducer: loading logged user:', user);
       // const users = [...state.users, user];
       return { ...state,loggedUser:loggedUser, error: '' };

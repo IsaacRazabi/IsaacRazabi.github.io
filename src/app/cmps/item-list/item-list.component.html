@@ -4,9 +4,11 @@
       {{ uploadedData }}
       <!-- *ngIf ="loggedUser.fullname===item?.by?.fullname"   -->
       <!-- <p>{{(loggedUser$ |async)!.fullname}}</p> -->
-      <div *ngIf="loggedUser$ | async">
+      <div *ngIf="loggedUser$ | async" >
+        <span *ngIf="loggedUser" >
         <button  *ngIf ="loggedUser.fullname===item?.by?.fullname" (click)="removeItem(item.id!)">x</button>
         <button *ngIf ="loggedUser.fullname===item?.by?.fullname" (click)="editItem(item.id!)">Edit</button>
+      </span>
       </div>
     </section>
   </item-preview>
