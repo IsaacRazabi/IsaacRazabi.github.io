@@ -18,14 +18,26 @@ export const SET_LOADING = '[user] loading';
 export const GET_LOGGED_USER = '[user] get logged ';
 export const LOADED_LOGGED_USER = '[user] logged loaded ';
 export const LOGIN = '[user] login';
+export const LOGOUT = '[user] logout';
+export const LOGOUT_USER = '[user] logged out ';
 
 
-export type UserAction = LoadUsers | LoadUser | RemoveUser | SaveUser | GetLoggedUser |Login
+export type UserAction = LoadUsers | LoadUser | RemoveUser | SaveUser | GetLoggedUser |Login | Logout|LogoutUser
 
 export class Login implements Action {
   readonly type = LOGIN;
   constructor(public user:User) {}
 }
+export class Logout implements Action {
+  readonly type = LOGOUT;
+  constructor() {}
+}
+
+export class LogoutUser implements Action {
+  readonly type = LOGOUT_USER;
+  constructor() {}
+}
+
 
 export class GetLoggedUser implements Action {
   readonly type = GET_LOGGED_USER;

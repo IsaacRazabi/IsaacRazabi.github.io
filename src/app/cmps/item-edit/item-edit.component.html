@@ -35,7 +35,7 @@
     </main>
 </section>
 <section *ngIf="!(loggedUser$|async)">
-  <div class="modalWrapper">
+  <div  [class.modalWrapper]="modalOpen">
     <main class="main-display" >
       <button class="close-modal-btn" (click)="closeModal()">❌</button>
       <p>Sorry! you have to sign-up to add posts</p>

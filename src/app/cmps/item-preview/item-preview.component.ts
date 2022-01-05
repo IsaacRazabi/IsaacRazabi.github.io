@@ -36,15 +36,34 @@ export class EscapeHtmlPipe implements PipeTransform {
 export class ItemPreviewComponent implements OnInit {
   @Input() item: Item | null = null; //gets from father component : item-list
   loggedUser$: Observable<User | null>;
-
+  itemImg: string='';
+  longText:boolean=false;
   // img = this.item!.img ;
   img ='https://random.imagecdn.app/500/150 ';
+myImage : string = 'https://random.imagecdn.app/500/150 ';
   strHtml: string = '';
   constructor(private itemList: ItemListComponent,private store: Store<State>) { 
     this.loggedUser$ = this.store.select('userState').pipe(pluck('user'))!;
   }
   ngOnInit(){
+    this.generateImg()
+
     
+    // if(!this.item?.img) this.item?.img!='https://random.imagecdn.app/500/150 '
+  }
+  generateImg() {
+  //  this.itemImg = JSON.parse(JSON.stringify(this.item!.img));
+    this.itemImg =  'https://random.imagecdn.app/500/150 ';
+  }
+  checkLongText(){
+    if (this.item?.text?.length! <30 || this.item?.text?.length! === undefined) return true
+    else {
+      if (this.longText) return true
+      else return false
+    } 
+  }
+  showLongText(){
+    this.longText=!this.longText;
     
   }
 }

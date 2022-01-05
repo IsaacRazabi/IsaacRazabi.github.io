@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'; 
 import { Store } from '@ngrx/store';
-import { Login, SaveUser } from '../../store/actions/user.actions';
+import { Login, Logout, SaveUser  } from '../../store/actions/user.actions';
 import { Observable, of } from 'rxjs';
 import { User } from 'src/app/models/item';
 import { State } from '../../store/store';
@@ -50,6 +50,11 @@ async  signup(){
 await this.store.dispatch(new SaveUser (this.signUpCredentials));
 await this.store.dispatch(new Login (this.signUpCredentials));
 this.router.navigate(['home']);
+}
+
+logout(){
+  this.store.dispatch(new Logout());
+  this.router.navigate(['home']);
 }
 
   

@@ -47,7 +47,7 @@ export function reducer(state: ItemState = initialState, action: any): ItemState
     } case LOADED_ITEMS: {
       console.log(action); // return from app.effects - return type+array from observable of query
       const { items } = action; // return from app.effects - return type+array from observable of query
-      console.log(`Reducer: Setting loaded items (${items.length}) items`);
+      // console.log(`Reducer: Setting loaded items (${items.length}) items`);
       return { ...state, items, isLoading: false, error: '' };
     } case LOADED_ITEM: {
       const { item } = action;

@@ -28,7 +28,7 @@
 
 
 
-import { SET_LOADING, LOADED_USERS, REMOVED_USER, ADDED_USER, UPDATED_USER, LOADED_USER, SET_ERROR,LOADED_LOGGED_USER } from '../actions/user.actions';
+import { SET_LOADING, LOADED_USERS, REMOVED_USER, ADDED_USER, UPDATED_USER, LOADED_USER, SET_ERROR,LOADED_LOGGED_USER,LOGOUT_USER } from '../actions/user.actions';
 import { from, of } from 'rxjs';
 import { UserService  } from 'src/app/services/user.service';
 // import this vars from actions enable us to determent which change is needed on state.
@@ -105,7 +105,15 @@ export function reducer(state: UserState = initialState, action: any): UserState
     }
     case LOADED_LOGGED_USER: {
       const { user } = action; 
-     let loggedUser=user.user
+      let loggedUser;
+      if (user) loggedUser=user.user
+      console.log('Reducer: loading logged user:', user);
+      // const users = [...state.users, user];
+      return { ...state,loggedUser:user, error: '' };
+    }
+    case LOGOUT_USER: {
+      const { user } = action; 
+     let loggedUser=user
       console.log('Reducer: loading logged user:', user);
       // const users = [...state.users, user];
       return { ...state,loggedUser:loggedUser, error: '' };

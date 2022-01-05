@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { pluck } from 'rxjs/operators';
 import { Item } from '../../models/item';
-import { SaveItem } from '../../store/actions/item.actions';
+import { LoadItems, SaveItem } from '../../store/actions/item.actions';
 import { UpdatedUser,SaveUser } from 'src/app/store/actions/user.actions';
 import { State } from '../../store/store';
 import { User } from 'src/app/models/item';
@@ -34,6 +34,7 @@ export class ItemEditComponent implements OnInit {
   sub: Subscription | null = null;
   files: File[] = [];
   uploadedItems:any=[];
+  filterBy: string = '';
 
   constructor(private store: Store<State>,private _uploadService:uploadService) {
     this.item$ = this.store.select('itemState').pipe(pluck('item'));
@@ -41,7 +42,7 @@ export class ItemEditComponent implements OnInit {
 
   }
   closeModal(){
-this.modalOpen = false
+this.modalOpen = !this.modalOpen
 
   }
   get itemEditState() {
@@ -64,6 +65,7 @@ this.loggedUser$.subscribe((user:any)=>{
 })
 this.loggedUser.items?.push(this.item);
 this.store.dispatch(new UpdatedUser(this.loggedUser));
+this.store.dispatch(new LoadItems(this.filterBy));
 // this.store.dispatch(new SaveUser(Object.assign(this.item)));
   }
   ngOnDestroy() {
@@ -89,7 +91,7 @@ this.store.dispatch(new UpdatedUser(this.loggedUser));
       this.item.by!.fullname=this.loggedUser.fullname;
       this.store.dispatch(new SaveItem(this.item));
   this.saved.emit();
-
+  this.store.dispatch(new LoadItems(this.filterBy));
   return
     }
     const file_data = this.files[0];
@@ -114,8 +116,9 @@ this.item.by!.date=Date.now();
 
   this.store.dispatch(new SaveItem(this.item));
   this.saved.emit();
+  this.store.dispatch(new LoadItems(this.filterBy));
 })
-
+this.store.dispatch(new LoadItems(this.filterBy));
   }
   
 }

@@ -27,7 +27,9 @@ import {
   LOAD_USER,
   GET_LOGGED_USER,
   LOADED_LOGGED_USER,
-  LOGIN
+  LOGIN,
+  LOGOUT,
+  LOGOUT_USER
 } from './actions/user.actions'
 // the actual response to the component dispatch as vue actions
 @Injectable()
@@ -44,6 +46,7 @@ export class AppEffects {
               // this is the finale data on loadItems$ observable pipe , that will go back to reducer that will update the store
               type: LOADED_ITEMS,
               items,
+              log:console.log(items)        
             })),
             catchError((error) => {
               console.log('Effect: Caught error ===> Reducer', error);
@@ -170,6 +173,8 @@ export class AppEffects {
           map((user) => ({
             type: LOADED_LOGGED_USER,
             user,
+            check : console.log(user)
+            
           })),
           catchError((error) => {
             console.log('Effect: Caught error ===> Reducer', error);
@@ -192,7 +197,8 @@ export class AppEffects {
           tap(() => console.log('Effects: Got login user from service ===> Reducer',action)),
           map((user) => ({
             type: LOADED_LOGGED_USER,
-            user:action.user,   
+            user: {user:action.user},   
+            check : console.log({user:action.user})
           })),
           catchError((error) => {
             console.log('Effect: Caught error ===> Reducer', error);
@@ -205,6 +211,30 @@ export class AppEffects {
       )
     );
   });
+
+  logout$= createEffect(() => {
+    return this.actions$.pipe(
+      ofType(LOGOUT),
+      tap(() => console.log('Effects: load user ==> service')),
+      switchMap((action) =>
+        from(this.userService.logout()).pipe(
+          tap(() => console.log('Effects: Got logout user from service ===> Reducer',action)),
+          map((user) => ({
+            type: LOGOUT_USER,
+            user:null,   
+          })),
+          catchError((error) => {
+            console.log('Effect: Caught error ===> Reducer', error);
+            return of({
+              type: SET_ERROR,
+              error: error.toString(),
+            });
+          })
+        )
+      )
+    );
+  });
+
 
   // updateUser$ = createEffect(() => {
   //   return this.actions$.pipe(

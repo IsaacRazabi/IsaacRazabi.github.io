@@ -28,5 +28,12 @@ export interface User {
   fullname: string,
   isAdmin?: false,
   item?:Item,
-  items?:Item[]
+  items?:Item[],
+  user?:{  id?:any
+    username: string,
+    password: any,
+    fullname: string,
+    isAdmin?: false,
+    item?:Item,
+    items?:Item[],},
 }
