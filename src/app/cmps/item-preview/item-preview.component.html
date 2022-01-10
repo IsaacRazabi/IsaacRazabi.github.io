@@ -20,8 +20,13 @@
   <span class="item-details">
   <p>{{item?.by?.fullname}}</p>
   <p>{{item?.by?.date | date: 'hh:mm:ss a'}}</p>
-</span>
+ 
   
+</span>
+<el-rate [model]="3" [show-text]="false">
+</el-rate>
+  
+
   <!-- <img src='{{item.img}}' -->
   <div class="text-center">
     <ng-content></ng-content>

@@ -1,7 +1,10 @@
+
 <section *ngIf="(loggedUser$|async)" [hidden]="!modalOpen" class="item-edit modalWrapper">
-  
   <main   class="main-display" >
     <button class="close-modal-btn" (click)="closeModal()">❌</button>
+    <el-alert class="alertClass" type="success" [closable]="false">
+      "This site is for learning purposes .Pay attention that your photos are actually uploading to a server. "
+    </el-alert>
       <h2 class="centered-text">{{itemEditState}} your post </h2>
     <form class="form-container" (submit)="$event.preventDefault()">
      

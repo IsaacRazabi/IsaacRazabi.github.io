@@ -6,7 +6,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-
+import { ElModule } from 'element-angular'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -24,7 +25,12 @@ import { ItemEditComponent } from './cmps/item-edit/item-edit.component';
 import { LoginComponent } from './cmps/login/login.component';
 import { UserSettingComponent } from './cmps/user-setting/user-setting.component';
 
-
+declare module "@angular/core" {
+  interface ModuleWithProviders<T = any> {
+      ngModule: Type<T>;
+      providers?: Provider[];
+  }
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,14 +42,17 @@ import { UserSettingComponent } from './cmps/user-setting/user-setting.component
     ItemPreviewComponent,
     LoginComponent,
     UserSettingComponent,
-
+    
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     NgxDropzoneModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    ElModule.forRoot(),
+    
     StoreModule.forRoot(reducers, {
       metaReducers,
       runtimeChecks: {

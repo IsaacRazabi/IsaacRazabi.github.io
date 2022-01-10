@@ -80,21 +80,23 @@ this.store.dispatch(new LoadItems(this.filterBy));
     console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
   }
-  onUpload(){
+ async onUpload(){
     if(!this.files[0]){
       // alert('upload some files first ')ף
       this.loggedUser$.subscribe((user:any)=>{
         this.loggedUser=user
       })
-      this.loggedUser.items?.push(this.item);
-      
+      this.loggedUser.items?.push(this.item); 
       this.item.by!.fullname=this.loggedUser.fullname;
-      this.store.dispatch(new SaveItem(this.item));
+
+      this.store.dispatch(new UpdatedUser(this.loggedUser));
+    await this.store.dispatch(new SaveItem(this.item));
   this.saved.emit();
-  this.store.dispatch(new LoadItems(this.filterBy));
+   this.store.dispatch(new LoadItems(this.filterBy));
   return
     }
-    const file_data = this.files[0];
+    
+const file_data = this.files[0];
 const data = new FormData();
 data.append('file',file_data);
 data.append('upload_preset','wtjy3eil');
@@ -105,16 +107,17 @@ this._uploadService.uploadImage(data).subscribe((response:any)=>{
   this.item.img = this.uploadedItems[0];
  
   this.loggedUser$.subscribe((user:any)=>{
-    this.loggedUser=user
+    this.loggedUser=user;
   })
   this.loggedUser.items?.push(this.item);
   this.item.by!.fullname=this.loggedUser.fullname;
+
 
 this.item.by!.date=Date.now();
   this.store.dispatch(new UpdatedUser(this.loggedUser));
 
 
-  this.store.dispatch(new SaveItem(this.item));
+   this.store.dispatch(new SaveItem(this.item));
   this.saved.emit();
   this.store.dispatch(new LoadItems(this.filterBy));
 })

@@ -6,8 +6,8 @@
       <!-- <p>{{(loggedUser$ |async)!.fullname}}</p> -->
       <div *ngIf="loggedUser$ | async" >
         <span *ngIf="loggedUser" >
-        <button  *ngIf ="loggedUser.fullname===item?.by?.fullname" (click)="removeItem(item.id!)">x</button>
-        <button *ngIf ="loggedUser.fullname===item?.by?.fullname" (click)="editItem(item.id!)">Edit</button>
+        <button class="item-btn"  *ngIf ="loggedUser.fullname===item?.by?.fullname" (click)="removeItem(item.id!)">x</button>
+        <button class="item-btn" *ngIf ="loggedUser.fullname===item?.by?.fullname" (click)="editItem(item.id!)">Edit</button>
       </span>
       </div>
     </section>

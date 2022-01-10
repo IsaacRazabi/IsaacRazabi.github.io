@@ -1,53 +1,136 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, from, of } from 'rxjs';
+import { Observable, from, of, AsyncSubject } from 'rxjs';
 import { Item, rawItem } from '../models/item';
 import { LoadingItems } from '../store/actions/item.actions';
 import { ItemState } from '../store/reducers/item.reducer';
-
 import { storageService } from './async-storage.service';
+
 
 const ENTITY = 'item';
 @Injectable({
   providedIn: 'root',
 })
 export class ItemService {
+  x:any=[];
   items: Item[] = [];
   constructor(private store: Store<ItemState>, private https: HttpClient) {
     this.items = JSON.parse(localStorage.getItem(ENTITY) || 'null');
   }
-  query(filterBy = ''): Observable<Item[]> {
-    this.store.dispatch(new LoadingItems());
-    return from(storageService.query(ENTITY) as Promise<Item[]>);
-  }
+  // query(filterBy = ''): Observable<Item[]> {
+  //   this.store.dispatch(new LoadingItems());
+  //   return from(storageService.query(ENTITY) as Promise<Item[]>);
+  // }
   realQuery(): Observable<Item[]> {
-    let realItem = this.https.get('https://retoolapi.dev/NLfiGD/data');
-    let data = realItem.subscribe((res) => {
-      if (!this.items || this.items.length === 0) {
-        if (res === undefined) JSON.parse(localStorage.getItem(ENTITY) || 'null');
-        else {
-          let data = JSON.parse(JSON.stringify(res));
-          let newData = data.map((element: any, index: number) => {
-            let src = this.demoData()[index];
-            let user = this.demoUsers()[index];
-            element.img = src;
-            element.by = {
-              fullname: user,
-              date: Date.now(),
-            };
-            element.text = this.demoText()[index];
-            // element.by.fullname = user;
-            return element;
-          });
-          return localStorage.setItem(ENTITY, JSON.stringify(newData));
-        }
-      } else {
-        return this.items;
-      }
-    });
-    return of(this.items);
+  //   let realItem = this.https.get('https://retoolapi.dev/NLfiGD/data');
+  //   realItem.subscribe((res:any) => {
+  //    newData.push(res)
+  // });
+
+    if (this.items!==null)  return of(this.items);
+  
+  // this.getApiData()
+  // .then(response => response.json())
+  // .then(data => console.log(data))
+  // .catch((err:any) => {
+  //     console.log(err);
+  //   }); 
+
+    // fetch('https://retoolapi.dev/NLfiGD/data')
+    //  .then(response => response.json())
+    //  .then(data => data.map((element: any, index: number) => {
+    //   let src = this.demoData()[index];
+    //   let user = this.demoUsers()[index];
+    //   element.img = src;
+    //   element.by = {
+    //     fullname: user,
+    //     date: Date.now(),
+    //   }
+    //   element.text = this.demoText()[index];
+    //   // element.by.fullname = user;
+    //   return element;
+    // }))
+    // .then(res=>{
+    // localStorage.setItem(ENTITY, JSON.stringify(res));
+    // this.items = JSON.parse(localStorage.getItem(ENTITY) || 'null');
+    // })
+    const observable$  = from(this.getApi());
+
+    return observable$ as unknown as Observable<Item[]> 
   }
+
+  //  let data= realItem.subscribe((res) => {
+  //       // if (res === undefined) JSON.parse(localStorage.getItem(ENTITY) || 'null');
+  //       let data = JSON.parse(JSON.stringify(res));
+  //       let newData = data.map((element: any, index: number) => {
+  //         let src = this.demoData()[index];
+  //         let user = this.demoUsers()[index];
+  //         element.img = src;
+  //         element.by = {
+  //           fullname: user,
+  //           date: Date.now(),
+  //         }
+  //         element.text = this.demoText()[index];
+  //         // element.by.fullname = user;
+  //         return element;
+  //       })
+  //       localStorage.setItem(ENTITY, JSON.stringify(newData));
+
+        // this.items=newData;
+        // this.items=JSON.parse(localStorage.getItem(ENTITY) || 'null');
+        // return newData;
+      
+      // });
+
+
+      // var subject = new AsyncSubject();
+      // subject.next(data); // store value
+      // subject.complete(); // publish only when sequence is completed
+      // subject.subscribe({
+      //   next: (response:any) => {
+      //     this.items = response;
+      //      return of(response)
+      //   }
+
+      // return of(this.items)
+
+      // this.items=JSON.parse(localStorage.getItem(ENTITY) || 'null');
+      //   console.log(this.items);
+      //   return of(this.items);
+   
+  
+async getApi(){
+  let x;
+ await fetch('https://retoolapi.dev/NLfiGD/data')
+     .then(response => response.json())
+     .then(data => data.map((element: any, index: number) => {
+      let src = this.demoData()[index];
+      let user = this.demoUsers()[index];
+      element.img = src;
+      element.by = {
+        fullname: user,
+        date: Date.now(),
+      }
+      element.text = this.demoText()[index];
+      // element.by.fullname = user;
+      return element;
+    }))
+    .then(res=>{
+      localStorage.setItem(ENTITY, JSON.stringify(res));
+x=res
+    })
+    return x 
+}
+  async getApiData(){
+    let newData:any=[];
+  let data = await this.https.get('https://retoolapi.dev/NLfiGD/data');
+ await data.subscribe((res:any) => {
+    localStorage.setItem(ENTITY, JSON.stringify(res));
+    newData.push(res);
+ })
+return newData
+}
 
   getById(itemId: string, id: string): Observable<Item> {
     id = itemId;
@@ -210,3 +293,7 @@ export class ItemService {
     return data;
   }
 }
+function then(arg0: (result: any) => void) {
+  throw new Error('Function not implemented.');
+}
+

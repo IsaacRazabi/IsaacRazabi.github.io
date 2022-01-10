@@ -46,4 +46,4 @@ testem.log
 Thumbs.db
 
 #password
-\src\app\services\upload_Service.ts
+.src\app\services\upload_Service.ts

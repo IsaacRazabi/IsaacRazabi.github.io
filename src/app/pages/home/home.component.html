@@ -1,4 +1,10 @@
 <section class="container">
     <!-- <p >Number of Items : {{(items$|async)!.length}}!</p> -->
+    <!-- <div [class.show]="loading">     -->
+    <div  [full-screen]="true" [el-loading]="loading">
+        <el-tag>Loading new posts</el-tag>
+      </div>
+    <!-- </div> -->
+      
     <item-app></item-app>
 </section>

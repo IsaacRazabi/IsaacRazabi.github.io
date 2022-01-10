@@ -190,8 +190,12 @@ async  getById(userId:any) {
 
  async login (userCred:any) {
     let users = await storageService.query('user');
+    console.log(users);
+    
     let userCredId = users.find((user:any)=> 
         user.user.password === userCred.user.password && user.user.username === userCred.user.username);  
+        console.log(userCredId);
+        
     const user = users.find((user:any) => user.id === userCredId!.id);
     console.log(user);
     // return _saveLocalUser(user)

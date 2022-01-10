@@ -39,6 +39,7 @@ export class ItemPreviewComponent implements OnInit {
   itemImg: string='';
   longText:boolean=false;
   // img = this.item!.img ;
+  
   img ='https://random.imagecdn.app/500/150 ';
 myImage : string = 'https://random.imagecdn.app/500/150 ';
   strHtml: string = '';
@@ -51,6 +52,7 @@ myImage : string = 'https://random.imagecdn.app/500/150 ';
     
     // if(!this.item?.img) this.item?.img!='https://random.imagecdn.app/500/150 '
   }
+
   generateImg() {
   //  this.itemImg = JSON.parse(JSON.stringify(this.item!.img));
     this.itemImg =  'https://random.imagecdn.app/500/150 ';

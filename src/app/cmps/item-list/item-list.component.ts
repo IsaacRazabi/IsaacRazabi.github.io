@@ -10,6 +10,8 @@ import { pluck } from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';  
 import { BrowserModule } from '@angular/platform-browser';
+import { GetLoggedUser, UpdatedUser } from 'src/app/store/actions/user.actions';
+import { LoadItems } from 'src/app/store/actions/item.actions';
 
 @Component({
   selector: 'item-list',
@@ -28,15 +30,19 @@ export class ItemListComponent implements OnInit {
     fullname: "",
     isAdmin: false,
   } ;
+  filterBy: string = '';
   // type:Array<string> = this.items!.map((el:string)=>el.itemType)
   constructor(private store: Store<State>) {
     this.loggedUser$ = this.store.select('userState').pipe(pluck('user'))!;
   }
 
   ngOnInit() {
+    this.store.dispatch(new GetLoggedUser());
     this.loggedUser$.subscribe((user:any)=>{
       this.loggedUser=user
     })
+    this.store.dispatch(new LoadItems(this.filterBy));
+    this.store.dispatch(new UpdatedUser(this.loggedUser));
   }
   removeItem(itemId: string) {
     this.removed.emit(itemId)
