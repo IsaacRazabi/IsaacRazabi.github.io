@@ -45,5 +45,6 @@ testem.log
 .DS_Store
 Thumbs.db
 
-#password
+#passwo
 upload_Service.ts
+config.ts
