@@ -46,4 +46,4 @@ testem.log
 Thumbs.db
 
 #password
-upload_Service.ts
+/upload_Service.ts
